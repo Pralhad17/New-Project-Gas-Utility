@@ -1,0 +1,54 @@
+{% extends 'service/base.html' %}
+
+{% block title %}Submit Service Request - Gas Utility Services{% endblock %}
+{% block navbar %}
+
+<li class="nav-item">
+    <a class="btn btn-primary" href="{% url 'user_home' %}">Home</a>
+</li><br><br>
+<!-- Add the Submit Request button to the navbar -->
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="btn btn-info" href="{% url 'service_request_list' %}">Service Requests</a>
+    </li>
+
+</ul>
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </li>
+</ul>
+
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title bg-dark-subtle mb-4">Submit a Service Request</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                            {{ form.request_type.label_tag }}
+                            {{ form.request_type }}
+                        </div>
+                        <div class="mb-2">
+                            {{ form.details.label_tag }}
+                            {{ form.details }}
+                        </div>
+                        <div class="mb-2">
+                            {{ form.proof.label_tag }}
+                            {{ form.proof }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-30 text-center">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

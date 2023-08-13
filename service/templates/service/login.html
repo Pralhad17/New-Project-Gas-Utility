@@ -1,0 +1,33 @@
+{% extends 'service/base.html' %}
+
+{% block title %}User Login{% endblock %}
+{% block extra_nav %}
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="btn btn-info" href="{% url 'user_login' %}"> Login </a>
+    </li>
+
+    <li class="nav-item ml-auto">
+        <a class="btn btn-warning" href="{% url 'user_registration' %}"> Registration </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">User Login</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary btn-md ">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

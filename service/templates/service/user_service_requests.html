@@ -1,0 +1,67 @@
+{% extends 'service/base_admin.html' %}
+
+{% block extra_nav %}
+
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin_service_requests' %}">Service Requests</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Service Requests</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Request Type</th>
+                <th>Details</th>
+                <th>Proof</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in user_service_requests %}
+            <tr>
+                <td>{{ request.request_type }}</td>
+                <td>{{ request.details }}</td>
+                <td>
+                    {% if request.proof %}
+                    <img src="{{ request.proof.url }}" alt="Proof" class="img-fluid">
+                    {% else %}
+                    No proof provided
+                    {% endif %}
+                </td>
+                <td>
+                    {% if request.status == 'Pending' %}
+                    <span class="badge bg-danger">{{ request.get_status_display }}</span>
+                    {% elif request.status == 'In Progress' %}
+                    <span class="badge bg-warning">{{ request.get_status_display }}</span>
+                    {% elif request.status == 'Resolved' %}
+                    <span class="badge bg-success">{{ request.get_status_display }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if request.status == 'Pending' %}
+                    <a href="{% url 'user_service_request' request_id=1 new_status='in_progress' %}">Change Status</a>>
+                    {% elif request.status == 'In Progress' %}
+                    <a href="{% url 'user_service_request' request_id=1 new_status='in_progress' %}">Change Status</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

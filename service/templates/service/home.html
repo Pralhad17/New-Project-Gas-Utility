@@ -1,0 +1,17 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+<h1>Welcome to Gas Utility Services</h1>
+<p>Submit service requests online, track their status, and more!</p>
+{% endblock %}
+
+{% block extra_nav %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item mr-3">
+        <a class="btn btn-info" href="{% url 'user_login' %}">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-warning" href="{% url 'user_registration' %}">Registration</a>
+    </li>
+</ul>
+{% endblock %}

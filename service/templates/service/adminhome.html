@@ -1,0 +1,30 @@
+{% extends 'service/base_admin.html' %}
+
+{% block title %}Admin Home{% endblock %}
+
+{% block extra_nav %}
+
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin_service_requests' %}">Service Requests</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome to Your Admin Home Page</h2>
+    <p class="text-center">This is your personalized user home page.</p>
+</div>
+{% endblock %}

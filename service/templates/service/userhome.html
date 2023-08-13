@@ -1,0 +1,31 @@
+{% extends 'service/base.html' %}
+
+{% block title %}User Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome to Your User Home Page</h2>
+    <p class="text-center">This is your personalized user home page.</p>
+</div>
+{% endblock %}
+
+{% block extra_nav %}
+<div class="navbar-nav me-auto mb-2 mb-lg-0 id=navbarNav">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'service_request_list' %}">Track Requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-info" href="{% url 'submit_service_request' %}">Add Service Request</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </li>
+    </ul>
+</div>
+{% endblock %}

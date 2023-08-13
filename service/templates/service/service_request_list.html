@@ -1,0 +1,58 @@
+{% extends 'service/base.html' %}
+{% block extra_nav %}
+<div class="navbar-nav me-auto mb-2 mb-lg-0 id=navbarNav">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'service_request_list' %}">Track Requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-info" href="{% url 'submit_service_request' %}">Add Service Request</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Service Requests</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Request Type</th>
+                <th>Details</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Resolved At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in service_requests %}
+            <tr>
+                <td>{{ request.request_type }}</td>
+                <td>{{ request.details }}</td>
+                <td>
+                    {% if request.status == 'Pending' %}
+                    <span class="text-danger">{{ request.status }}</span>
+                    {% elif request.status == 'In Progress' %}
+                    <span class="text-warning">{{ request.status }}</span>
+                    {% else %}
+                    <span class="text-success">{{ request.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ request.created_at }}</td>
+                <td>{{ request.resolved_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
